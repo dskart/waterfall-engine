@@ -1,0 +1,690 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "core_service/v2alpha1/account.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AccountService"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v2alpha1/account/{id}": {
+      "get": {
+        "summary": "Get an account.",
+        "description": "Get an account and return the account if successfull.",
+        "operationId": "GetAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      },
+      "put": {
+        "summary": "Update an account.",
+        "description": "Update an account and return the updated account if successfull.",
+        "operationId": "PutAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1AccountServicePutAccountBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/pending_users": {
+      "get": {
+        "summary": "Get account pending users.",
+        "description": "Get account pending users and return the account pending users if successfull.",
+        "operationId": "GetAccountPendingUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountPendingUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/user/accept_invite": {
+      "put": {
+        "summary": "Accept a account invite.",
+        "description": "Accept a account invite.",
+        "operationId": "PutAcceptAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutAcceptAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1AccountServicePutAcceptAccountInviteBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/user/roles": {
+      "put": {
+        "summary": "Update a user's specific account roles",
+        "description": "Update a user's roles.",
+        "operationId": "PutUserAccountRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutUserAccountRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1AccountServicePutUserAccountRolesBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/users": {
+      "get": {
+        "summary": "Get account users.",
+        "description": "Get account users and return the account users if successfull.",
+        "operationId": "GetAccountUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      },
+      "delete": {
+        "summary": "Delete users from an account.",
+        "description": "Delete users from an account.",
+        "operationId": "DeleteAccountUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1DeleteAccountUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1AccountServiceDeleteAccountUsersBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      },
+      "put": {
+        "summary": "Add users to an account.",
+        "description": "Add users to an account.",
+        "operationId": "PutAccountUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutAccountUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1AccountServicePutAccountUsersBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/users_email_and_name": {
+      "get": {
+        "summary": "Get account users email and name.",
+        "description": "Get account users email and name.",
+        "operationId": "GetAccountUsersEmailAndName",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountUsersEmailAndNameResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    }
+  },
+  "definitions": {
+    "v2alpha1Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        },
+        "enabledDataApps": {
+          "$ref": "#/definitions/v2alpha1EnabledDataApps"
+        }
+      }
+    },
+    "v2alpha1AccountServiceDeleteAccountUsersBody": {
+      "type": "object",
+      "properties": {
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2alpha1AccountServicePutAcceptAccountInviteBody": {
+      "type": "object"
+    },
+    "v2alpha1AccountServicePutAccountBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1AccountServicePutAccountUsersBody": {
+      "type": "object",
+      "properties": {
+        "userEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2alpha1AccountServicePutUserAccountRolesBody": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2alpha1AccountUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1Role"
+          }
+        }
+      }
+    },
+    "v2alpha1AccountUserEmailAndName": {
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1ActionType": {
+      "type": "string",
+      "enum": [
+        "ACTION_TYPE_UNSPECIFIED",
+        "ACTION_TYPE_WRITE",
+        "ACTION_TYPE_READ"
+      ],
+      "default": "ACTION_TYPE_UNSPECIFIED"
+    },
+    "v2alpha1ChronicleDataApp": {
+      "type": "object",
+      "properties": {
+        "enabledWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2alpha1ChronicleDataAppWidgetType"
+          }
+        }
+      }
+    },
+    "v2alpha1ChronicleDataAppWidgetType": {
+      "type": "string",
+      "enum": [
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_ALL",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_S3_AI",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_SNOWFLAKE_AI",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_GCP_CLOUD_STORAGE_AI"
+      ],
+      "default": "CHRONICLE_DATA_APP_WIDGET_TYPE_UNSPECIFIED"
+    },
+    "v2alpha1ClusterIds": {
+      "type": "object",
+      "properties": {
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2alpha1CrunchDataApp": {
+      "type": "object",
+      "properties": {
+        "enabledWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2alpha1CrunchDataAppWidgetType"
+          }
+        }
+      }
+    },
+    "v2alpha1CrunchDataAppWidgetType": {
+      "type": "string",
+      "enum": [
+        "CRUNCH_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+        "CRUNCH_DATA_APP_WIDGET_TYPE_ALL"
+      ],
+      "default": "CRUNCH_DATA_APP_WIDGET_TYPE_UNSPECIFIED"
+    },
+    "v2alpha1DeleteAccountUsersResponse": {
+      "type": "object"
+    },
+    "v2alpha1EnabledDataApps": {
+      "type": "object",
+      "properties": {
+        "screen": {
+          "$ref": "#/definitions/v2alpha1ScreenDataApp"
+        },
+        "crunch": {
+          "$ref": "#/definitions/v2alpha1CrunchDataApp"
+        },
+        "chronicle": {
+          "$ref": "#/definitions/v2alpha1ChronicleDataApp"
+        }
+      }
+    },
+    "v2alpha1GetAccountPendingUsersResponse": {
+      "type": "object",
+      "properties": {
+        "pendingUserEmail": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2alpha1GetAccountResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v2alpha1Account"
+        }
+      }
+    },
+    "v2alpha1GetAccountUsersEmailAndNameResponse": {
+      "type": "object",
+      "properties": {
+        "accountUsersEmailAndName": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1AccountUserEmailAndName"
+          }
+        }
+      }
+    },
+    "v2alpha1GetAccountUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1AccountUser"
+          }
+        }
+      }
+    },
+    "v2alpha1InlinePolicy": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1Permission"
+          }
+        }
+      }
+    },
+    "v2alpha1Permission": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/v2alpha1ResourceType"
+        },
+        "clusterIds": {
+          "$ref": "#/definitions/v2alpha1ClusterIds",
+          "title": "if cluster_ids is empty, the permission applies to all clusters"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2alpha1ActionType"
+          }
+        }
+      }
+    },
+    "v2alpha1PutAcceptAccountInviteResponse": {
+      "type": "object"
+    },
+    "v2alpha1PutAccountResponse": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v2alpha1Account"
+        }
+      }
+    },
+    "v2alpha1PutAccountUsersResponse": {
+      "type": "object"
+    },
+    "v2alpha1PutUserAccountRolesResponse": {
+      "type": "object"
+    },
+    "v2alpha1ResourceType": {
+      "type": "string",
+      "enum": [
+        "RESOURCE_TYPE_UNSPECIFIED",
+        "RESOURCE_TYPE_CRUNCH",
+        "RESOURCE_TYPE_SCREEN",
+        "RESOURCE_TYPE_CHRONICLE",
+        "RESOURCE_TYPE_ACCOUNT"
+      ],
+      "default": "RESOURCE_TYPE_UNSPECIFIED"
+    },
+    "v2alpha1Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The account id for the role for account managed roles.\nThis field is nil for granica managed roles and granica roles."
+        },
+        "roleType": {
+          "$ref": "#/definitions/v2alpha1RoleType"
+        },
+        "inlinePolicies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1InlinePolicy"
+          }
+        }
+      }
+    },
+    "v2alpha1RoleType": {
+      "type": "string",
+      "enum": [
+        "ROLE_TYPE_UNSPECIFIED",
+        "ROLE_TYPE_ACCOUNT_MANAGED",
+        "ROLE_TYPE_GRANICA_MANAGED",
+        "ROLE_TYPE_GRANICA_ADMIN"
+      ],
+      "default": "ROLE_TYPE_UNSPECIFIED",
+      "description": " - ROLE_TYPE_ACCOUNT_MANAGED: Role is managed by an account and only available to that account.\n - ROLE_TYPE_GRANICA_MANAGED: Role is managed by granica and available to all accounts. (aka \"default\" roles)\n - ROLE_TYPE_GRANICA_ADMIN: Special granica roles only available to granica employees."
+    },
+    "v2alpha1ScreenDataApp": {
+      "type": "object",
+      "properties": {
+        "enabledWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2alpha1ScreenDataAppWidgetType"
+          }
+        }
+      }
+    },
+    "v2alpha1ScreenDataAppWidgetType": {
+      "type": "string",
+      "enum": [
+        "SCREEN_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+        "SCREEN_DATA_APP_WIDGET_TYPE_ALL",
+        "SCREEN_DATA_APP_WIDGET_TYPE_SCREEN_INFO_TYPES"
+      ],
+      "default": "SCREEN_DATA_APP_WIDGET_TYPE_UNSPECIFIED"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

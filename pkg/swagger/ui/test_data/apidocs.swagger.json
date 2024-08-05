@@ -1,0 +1,874 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dojo Core API",
+    "version": "v2alpha1"
+  },
+  "tags": [
+    {
+      "name": "RoleService"
+    },
+    {
+      "name": "AccountService"
+    },
+    {
+      "name": "AuthService"
+    }
+  ],
+  "basePath": "/api",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1alpha1/role/granica-managed": {
+      "get": {
+        "summary": "Get all the granica managed roles.",
+        "description": "Get all the granica managed roles.",
+        "operationId": "GetGranicaManagedRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetGranicaManagedRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": ["RoleService"]
+      }
+    },
+    "/v1alpha1/role/{id}": {
+      "get": {
+        "summary": "Get a role by id.",
+        "description": "Get a role by id.",
+        "operationId": "GetRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["RoleService"]
+      }
+    },
+    "/v2alpha1/account/{id}": {
+      "get": {
+        "summary": "Get an account.",
+        "description": "Get an account and return the account if successfull.",
+        "operationId": "GetAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      },
+      "put": {
+        "summary": "Update an account.",
+        "description": "Update an account and return the updated account if successfull.",
+        "operationId": "PutAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServicePutAccountBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/pending_users": {
+      "get": {
+        "summary": "Get account pending users.",
+        "description": "Get account pending users and return the account pending users if successfull.",
+        "operationId": "GetAccountPendingUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountPendingUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/user/accept_invite": {
+      "put": {
+        "summary": "Accept a account invite.",
+        "description": "Accept a account invite.",
+        "operationId": "PutAcceptAccountInvite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutAcceptAccountInviteResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServicePutAcceptAccountInviteBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/user/roles": {
+      "put": {
+        "summary": "Update a user's specific account roles",
+        "description": "Update a user's roles.",
+        "operationId": "PutUserAccountRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutUserAccountRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServicePutUserAccountRolesBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/users": {
+      "get": {
+        "summary": "Get account users.",
+        "description": "Get account users and return the account users if successfull.",
+        "operationId": "GetAccountUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      },
+      "delete": {
+        "summary": "Delete users from an account.",
+        "description": "Delete users from an account.",
+        "operationId": "DeleteAccountUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1DeleteAccountUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServiceDeleteAccountUsersBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      },
+      "put": {
+        "summary": "Add users to an account.",
+        "description": "Add users to an account.",
+        "operationId": "PutAccountUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PutAccountUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountServicePutAccountUsersBody"
+            }
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/account/{id}/users_email_and_name": {
+      "get": {
+        "summary": "Get account users email and name.",
+        "description": "Get account users email and name.",
+        "operationId": "GetAccountUsersEmailAndName",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetAccountUsersEmailAndNameResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["AccountService"]
+      }
+    },
+    "/v2alpha1/auth/signin/openid": {
+      "post": {
+        "summary": "OpenIdSignIn",
+        "description": "OpenIdSignIn",
+        "operationId": "OpenIdSignIn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PostOpenIdSignInResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PostOpenIdSignInRequest"
+            }
+          }
+        ],
+        "tags": ["AuthService"]
+      }
+    },
+    "/v2alpha1/auth/signout": {
+      "post": {
+        "summary": "SignOut",
+        "description": "SignOut",
+        "operationId": "SignOut",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PostSignOutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PostSignOutRequest"
+            }
+          }
+        ],
+        "tags": ["AuthService"]
+      }
+    }
+  },
+  "definitions": {
+    "v2alpha1Account": {
+      "properties": {
+        "enabledDataApps": {
+          "$ref": "#/definitions/v2alpha1EnabledDataApps"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1AccountServiceDeleteAccountUsersBody": {
+      "properties": {
+        "userIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1AccountServicePutAcceptAccountInviteBody": {
+      "type": "object"
+    },
+    "v2alpha1AccountServicePutAccountBody": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1AccountServicePutAccountUsersBody": {
+      "properties": {
+        "userEmails": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1AccountServicePutUserAccountRolesBody": {
+      "properties": {
+        "roleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1AccountUser": {
+      "properties": {
+        "emailAddress": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1Role",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1AccountUserEmailAndName": {
+      "properties": {
+        "emailAddress": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1ActionType": {
+      "default": "ACTION_TYPE_UNSPECIFIED",
+      "enum": [
+        "ACTION_TYPE_UNSPECIFIED",
+        "ACTION_TYPE_WRITE",
+        "ACTION_TYPE_READ"
+      ],
+      "type": "string"
+    },
+    "v2alpha1ChronicleDataApp": {
+      "properties": {
+        "enabledWidgets": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1ChronicleDataAppWidgetType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1ChronicleDataAppWidgetType": {
+      "default": "CHRONICLE_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+      "enum": [
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_ALL",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_S3_AI",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_SNOWFLAKE_AI",
+        "CHRONICLE_DATA_APP_WIDGET_TYPE_GCP_CLOUD_STORAGE_AI"
+      ],
+      "type": "string"
+    },
+    "v2alpha1ClusterIds": {
+      "properties": {
+        "clusterIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1CrunchDataApp": {
+      "properties": {
+        "enabledWidgets": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1CrunchDataAppWidgetType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1CrunchDataAppWidgetType": {
+      "default": "CRUNCH_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+      "enum": [
+        "CRUNCH_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+        "CRUNCH_DATA_APP_WIDGET_TYPE_ALL"
+      ],
+      "type": "string"
+    },
+    "v2alpha1DeleteAccountUsersResponse": {
+      "type": "object"
+    },
+    "v2alpha1EnabledDataApps": {
+      "properties": {
+        "chronicle": {
+          "$ref": "#/definitions/v2alpha1ChronicleDataApp"
+        },
+        "crunch": {
+          "$ref": "#/definitions/v2alpha1CrunchDataApp"
+        },
+        "screen": {
+          "$ref": "#/definitions/v2alpha1ScreenDataApp"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1GetAccountPendingUsersResponse": {
+      "properties": {
+        "pendingUserEmail": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1GetAccountResponse": {
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v2alpha1Account"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1GetAccountUsersEmailAndNameResponse": {
+      "properties": {
+        "accountUsersEmailAndName": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1AccountUserEmailAndName",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1GetAccountUsersResponse": {
+      "properties": {
+        "users": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1AccountUser",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1GetGranicaManagedRolesResponse": {
+      "properties": {
+        "roles": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1Role",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1GetRoleResponse": {
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v2alpha1Role"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1InlinePolicy": {
+      "properties": {
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1Permission",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1Permission": {
+      "properties": {
+        "actions": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1ActionType"
+          },
+          "type": "array"
+        },
+        "clusterIds": {
+          "$ref": "#/definitions/v2alpha1ClusterIds",
+          "title": "if cluster_ids is empty, the permission applies to all clusters"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/v2alpha1ResourceType"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1PostOpenIdSignInRequest": {
+      "properties": {
+        "idToken": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1PostOpenIdSignInResponse": {
+      "properties": {
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "tokenSecret": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1PostSignOutRequest": {
+      "type": "object"
+    },
+    "v2alpha1PostSignOutResponse": {
+      "type": "object"
+    },
+    "v2alpha1PutAcceptAccountInviteResponse": {
+      "type": "object"
+    },
+    "v2alpha1PutAccountResponse": {
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/v2alpha1Account"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1PutAccountUsersResponse": {
+      "type": "object"
+    },
+    "v2alpha1PutUserAccountRolesResponse": {
+      "type": "object"
+    },
+    "v2alpha1ResourceType": {
+      "default": "RESOURCE_TYPE_UNSPECIFIED",
+      "enum": [
+        "RESOURCE_TYPE_UNSPECIFIED",
+        "RESOURCE_TYPE_CRUNCH",
+        "RESOURCE_TYPE_SCREEN",
+        "RESOURCE_TYPE_CHRONICLE",
+        "RESOURCE_TYPE_ACCOUNT"
+      ],
+      "type": "string"
+    },
+    "v2alpha1Role": {
+      "properties": {
+        "accountId": {
+          "description": "The account id for the role for account managed roles.\nThis field is nil for granica managed roles and granica roles.",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inlinePolicies": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1InlinePolicy",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "roleType": {
+          "$ref": "#/definitions/v2alpha1RoleType"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1RoleType": {
+      "default": "ROLE_TYPE_UNSPECIFIED",
+      "description": " - ROLE_TYPE_ACCOUNT_MANAGED: Role is managed by an account and only available to that account.\n - ROLE_TYPE_GRANICA_MANAGED: Role is managed by granica and available to all accounts. (aka \"default\" roles)\n - ROLE_TYPE_GRANICA_ADMIN: Special granica roles only available to granica employees.",
+      "enum": [
+        "ROLE_TYPE_UNSPECIFIED",
+        "ROLE_TYPE_ACCOUNT_MANAGED",
+        "ROLE_TYPE_GRANICA_MANAGED",
+        "ROLE_TYPE_GRANICA_ADMIN"
+      ],
+      "type": "string"
+    },
+    "v2alpha1ScreenDataApp": {
+      "properties": {
+        "enabledWidgets": {
+          "items": {
+            "$ref": "#/definitions/v2alpha1ScreenDataAppWidgetType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2alpha1ScreenDataAppWidgetType": {
+      "default": "SCREEN_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+      "enum": [
+        "SCREEN_DATA_APP_WIDGET_TYPE_UNSPECIFIED",
+        "SCREEN_DATA_APP_WIDGET_TYPE_ALL",
+        "SCREEN_DATA_APP_WIDGET_TYPE_SCREEN_INFO_TYPES"
+      ],
+      "type": "string"
+    },
+    "protobufAny": {
+      "additionalProperties": {},
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "rpcStatus": {
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "details": {
+          "items": {
+            "$ref": "#/definitions/protobufAny",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "core_service/v2alpha1/role.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "RoleService"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1alpha1/role/granica-managed": {
+      "get": {
+        "summary": "Get all the granica managed roles.",
+        "description": "Get all the granica managed roles.",
+        "operationId": "GetGranicaManagedRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetGranicaManagedRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": ["RoleService"]
+      }
+    },
+    "/v1alpha1/role/{id}": {
+      "get": {
+        "summary": "Get a role by id.",
+        "description": "Get a role by id.",
+        "operationId": "GetRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1GetRoleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["RoleService"]
+      }
+    }
+  },
+  "definitions": {
+    "v2alpha1ActionType": {
+      "type": "string",
+      "enum": [
+        "ACTION_TYPE_UNSPECIFIED",
+        "ACTION_TYPE_WRITE",
+        "ACTION_TYPE_READ"
+      ],
+      "default": "ACTION_TYPE_UNSPECIFIED"
+    },
+    "v2alpha1ClusterIds": {
+      "type": "object",
+      "properties": {
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2alpha1GetGranicaManagedRolesResponse": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1Role"
+          }
+        }
+      }
+    },
+    "v2alpha1GetRoleResponse": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v2alpha1Role"
+        }
+      }
+    },
+    "v2alpha1InlinePolicy": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1Permission"
+          }
+        }
+      }
+    },
+    "v2alpha1Permission": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/v2alpha1ResourceType"
+        },
+        "clusterIds": {
+          "$ref": "#/definitions/v2alpha1ClusterIds",
+          "title": "if cluster_ids is empty, the permission applies to all clusters"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2alpha1ActionType"
+          }
+        }
+      }
+    },
+    "v2alpha1ResourceType": {
+      "type": "string",
+      "enum": [
+        "RESOURCE_TYPE_UNSPECIFIED",
+        "RESOURCE_TYPE_CRUNCH",
+        "RESOURCE_TYPE_SCREEN",
+        "RESOURCE_TYPE_CHRONICLE",
+        "RESOURCE_TYPE_ACCOUNT"
+      ],
+      "default": "RESOURCE_TYPE_UNSPECIFIED"
+    },
+    "v2alpha1Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The account id for the role for account managed roles.\nThis field is nil for granica managed roles and granica roles."
+        },
+        "roleType": {
+          "$ref": "#/definitions/v2alpha1RoleType"
+        },
+        "inlinePolicies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1InlinePolicy"
+          }
+        }
+      }
+    },
+    "v2alpha1RoleType": {
+      "type": "string",
+      "enum": [
+        "ROLE_TYPE_UNSPECIFIED",
+        "ROLE_TYPE_ACCOUNT_MANAGED",
+        "ROLE_TYPE_GRANICA_MANAGED",
+        "ROLE_TYPE_GRANICA_ADMIN"
+      ],
+      "default": "ROLE_TYPE_UNSPECIFIED",
+      "description": " - ROLE_TYPE_ACCOUNT_MANAGED: Role is managed by an account and only available to that account.\n - ROLE_TYPE_GRANICA_MANAGED: Role is managed by granica and available to all accounts. (aka \"default\" roles)\n - ROLE_TYPE_GRANICA_ADMIN: Special granica roles only available to granica employees."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
