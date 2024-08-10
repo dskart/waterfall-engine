@@ -17,11 +17,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 'v20.9.0'
+      
+      - name: Build UI
+        run: |
+          make bin/templ
+          ./bin/templ generate
+          cd ./ui && npm install
+          cd ./ui && npm run build
 
       - name: Build
         run: |
-          make bin/templ
-          make ui
           go build -v ./...
 
       - name: Test
