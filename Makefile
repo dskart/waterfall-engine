@@ -8,13 +8,17 @@ bin/staticcheck:
 bin/air: 
 	GOBIN=`pwd`/bin go install github.com/air-verse/air@latest
 
+.PHONY: bin/templ
+bin/templ: 
+	GOBIN=`pwd`/bin go install github.com/a-h/templ/cmd/templ@latest
+
 .PHONY: bin
-bin: bin/staticcheck bin/air
+bin: bin/staticcheck bin/air bin/templ
 
 .PHONY: generate
 generate: 
 	go generate ./...
-	templ generate
+	./bin/templ generate
 
 .PHONY: waterfall-engine
 waterfall-engine:

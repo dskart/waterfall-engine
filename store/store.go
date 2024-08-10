@@ -24,10 +24,7 @@ import (
 var ErrContention = fmt.Errorf("contention")
 
 type Store struct {
-	backend                      keyvaluestore.Backend
-	originBackend                keyvaluestore.Backend
-	hasEventuallyConsistentReads bool
-	hasReadCache                 bool
+	backend keyvaluestore.Backend
 }
 
 type resolverV2 struct {
