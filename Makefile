@@ -36,7 +36,7 @@ update-htmx:
 
 .PHONY: build-ui
 build-ui:
-	./bin/templ templ generate
+	./bin/templ generate
 	cd ./ui && npm run build
 
 .PHONY: ui
