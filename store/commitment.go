@@ -9,6 +9,7 @@ import (
 const (
 	commitmentKey              = "commitment"
 	commitmentsByEntityNameKey = "commitments_by_entity_name"
+	allCommitmentsKey          = "all_commitments"
 )
 
 func (s *Store) AddCommitment(commitment model.Commitment) error {
@@ -22,6 +23,7 @@ func (s *Store) AddCommitment(commitment model.Commitment) error {
 	tx := s.backend.AtomicWrite()
 	tx.SAdd(commitmentsByEntityNameKey+":"+commitment.EntityName, commitmentId)
 	tx.SetNX(commitmentKey+":"+commitmentId, serialized)
+	tx.SAdd(allCommitmentsKey, commitmentId)
 	if ok, err := execAtomicWrite(tx); err != nil {
 		return err
 	} else if !ok {
@@ -37,4 +39,13 @@ func (s *Store) GetCommitmentByIds(ids ...int) ([]*model.Commitment, error) {
 	}
 	var ret []*model.Commitment
 	return ret, s.getByIds(commitmentKey, &ret, NewGzipSerializer(), idStrings...)
+}
+
+func (s *Store) GetAllCommitments() ([]*model.Commitment, error) {
+	ids, err := s.backend.SMembers(allCommitmentsKey)
+	if err != nil {
+		return nil, err
+	}
+	var ret []*model.Commitment
+	return ret, s.getByIds(commitmentKey, &ret, NewGzipSerializer(), ids...)
 }

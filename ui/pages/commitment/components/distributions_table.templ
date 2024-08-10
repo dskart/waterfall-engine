@@ -1,0 +1,66 @@
+package components
+
+import "github.com/dskart/waterfall-engine/app/engine"
+
+templ row(distribution engine.Distribution) {
+	<tr>
+		<th>{ distribution.Date.Format("01/02/2006") }</th>
+		<td>{ distribution.Capital.Display() }</td>
+	</tr>
+	<tr class="py-4 px-4">
+		<td colspan="2" class="px-8">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Tier Name</th>
+						<th>Starting Tier Capital</th>
+						<th>LP Allocation</th>
+						<th>GP Allocation</th>
+						<th>Total Tier Distribution</th>
+						<th>Remaining Capital For Next Tier</th>
+					</tr>
+				</thead>
+				<tbody>
+					@tierStageRow("Return of Capital", distribution.ROC)
+					@tierStageRow("Preferred Return", distribution.PreferredReturn)
+					@tierStageRow("Catch-up", distribution.Catchup)
+					@tierStageRow("Final split", distribution.FinalSplit)
+					<tr>
+						<td>Total</td>
+						<td></td>
+						<td>{ distribution.DisplayLpTotalAllocation() }</td>
+						<td>{ distribution.DisplayGpTotalAllocation() }</td>
+						<td>{ distribution.DisplayTotalDistribution() }</td>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+}
+
+templ tierStageRow(name string, tierStage engine.TierStage) {
+	<tr>
+		<td>{ name }</td>
+		<td>{ tierStage.StartingCapital.Display() }</td>
+		<td>{ tierStage.LpAllocattion.Display() }</td>
+		<td>{ tierStage.GpAllocattion.Display() }</td>
+		<td>{ tierStage.TotalDistribution.Display() }</td>
+		<td>{ tierStage.RemainingCapital.Display() }</td>
+	</tr>
+}
+
+templ DistributionsTable(distributions []engine.Distribution) {
+	<table class="table">
+		<thead>
+			<tr class="text-lg">
+				<th>Distribution Date</th>
+				<th>Capital</th>
+			</tr>
+		</thead>
+		<tbody>
+			for _, d := range distributions {
+				@row(d)
+			}
+		</tbody>
+	</table>
+}

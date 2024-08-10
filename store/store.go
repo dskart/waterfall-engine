@@ -13,12 +13,15 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/ccbrown/keyvaluestore"
 	"github.com/ccbrown/keyvaluestore/dynamodbstore"
-	"github.com/ccbrown/keyvaluestore/keyvaluestorecache"
 	"github.com/ccbrown/keyvaluestore/memorystore"
 	"github.com/ccbrown/keyvaluestore/redisstore"
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
 )
+
+// Returned when a change conflicts with a simultaneous write, e.g. when you attempt to add a
+// revision that already exists.
+var ErrContention = fmt.Errorf("contention")
 
 type Store struct {
 	backend                      keyvaluestore.Backend
@@ -86,36 +89,6 @@ func New(ctx context.Context, cfg Config) (*Store, error) {
 
 func (s Store) Close() error {
 	return nil
-}
-
-func (s Store) WithReadCache() *Store {
-	if s.hasReadCache {
-		return &s
-	}
-	s.originBackend = s.backend
-	s.backend = keyvaluestorecache.NewReadCache(s.backend)
-	s.hasReadCache = true
-	return &s
-}
-
-func backendsWithEventuallyConsistentReads(backend, originBackend keyvaluestore.Backend) (newBackend, newOriginBackend keyvaluestore.Backend) {
-	switch backend := backend.(type) {
-	case *dynamodbstore.Backend:
-		return backend.WithEventuallyConsistentReads(), nil
-	case *keyvaluestorecache.ReadCache:
-		newOriginBackend, _ := backendsWithEventuallyConsistentReads(originBackend, nil)
-		return backend.WithBackend(newOriginBackend).WithEventuallyConsistentReads(), newOriginBackend
-	}
-	return backend, originBackend
-}
-
-func (s Store) WithEventuallyConsistentReads() *Store {
-	if s.hasEventuallyConsistentReads {
-		return &s
-	}
-	s.backend, s.originBackend = backendsWithEventuallyConsistentReads(s.backend, s.originBackend)
-	s.hasEventuallyConsistentReads = true
-	return &s
 }
 
 func (s *Store) getByIds(key string, dest interface{}, serializer Serializer, ids ...string) error {

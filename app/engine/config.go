@@ -1,21 +1,21 @@
 package engine
 
 type Config struct {
-	PreferedReturn PreferedReturnConfig
-	CatchUp        CatchUpConfig
-	FinalSplit     FinalSplitConfig
+	PreferredReturn PreferredReturnConfig `yaml:"PreferredReturn"`
+	CatchUp         CatchUpConfig         `yaml:"CatchUp"`
+	FinalSplit      FinalSplitConfig      `yaml:"FinalSplit"`
 }
 
-type PreferedReturnConfig struct {
-	HurdlePercentage float64
+type PreferredReturnConfig struct {
+	HurdlePercentage float64 `yaml:"HurdlePercentage"`
 }
 
 type CatchUpConfig struct {
-	CatchupPercentage        float64
-	CariedInterestPercentage float64
+	CatchupPercentage         float64 `yaml:"CatchupPercentage"`
+	CarriedInterestPercentage float64 `yaml:"CarriedInterestPercentage"`
 }
 
 type FinalSplitConfig struct {
-	LpPercentage float64
-	GpPercentage float64
+	LpPercentage float64 `yaml:"LpPercentage"`
+	GpPercentage float64 `yaml:"GpPercentage"`
 }

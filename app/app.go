@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/dskart/waterfall-engine/app/engine"
 	"github.com/dskart/waterfall-engine/store"
 	"go.uber.org/zap"
 )
@@ -12,6 +13,7 @@ type App struct {
 	store  *store.Store
 	config Config
 	logger *zap.Logger
+	engine engine.Engine
 }
 
 type Options struct {
@@ -25,10 +27,6 @@ func WithStore(store *store.Store) func(*Options) {
 }
 
 func New(ctx context.Context, logger *zap.Logger, config Config, opts ...func(*Options)) (*App, error) {
-	if err := config.Validate(); err != nil {
-		return nil, fmt.Errorf("could not validate app config: %w", err)
-	}
-
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
@@ -42,10 +40,13 @@ func New(ctx context.Context, logger *zap.Logger, config Config, opts ...func(*O
 		}
 	}
 
+	engine := engine.NewEngine(config.Engine)
+
 	ret := &App{
 		store:  options.store,
 		config: config,
 		logger: logger,
+		engine: engine,
 	}
 
 	return ret, nil

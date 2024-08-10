@@ -1,0 +1,36 @@
+package components
+
+import (
+	"fmt"
+	"github.com/dskart/waterfall-engine/model"
+	"strconv"
+)
+
+templ row(commitment *model.Commitment) {
+	<tr class="hover">
+		<th>{ strconv.Itoa(commitment.Id) }</th>
+		<td>
+			<a href={ templ.URL(fmt.Sprintf("/commitment/%d", commitment.Id)) } class="link link-primary">{  commitment.EntityName } </a>
+		</td>
+		<td>{  strconv.Itoa(commitment.FundId) }</td>
+		<td>{  commitment.DisplayAmount() }</td>
+	</tr>
+}
+
+templ CommitmentsTable(commitments []*model.Commitment) {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Fund ID</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			for _, c := range commitments {
+				@row(c)
+			}
+		</tbody>
+	</table>
+}

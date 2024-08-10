@@ -41,8 +41,3 @@ func (s *Session) Logger() *zap.Logger {
 	logger := s.logger
 	return logger
 }
-
-func (s Session) WithReadCache() *Session {
-	s.store = s.store.WithReadCache()
-	return &s
-}

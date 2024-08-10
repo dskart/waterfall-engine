@@ -1,7 +1,7 @@
 package app
 
 import (
-	appErrors "github.com/dskart/netword/pkg/errors"
+	appErrors "github.com/dskart/waterfall-engine/pkg/errors"
 	"go.uber.org/zap"
 )
 

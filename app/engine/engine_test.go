@@ -72,7 +72,7 @@ func TestEngine_CalculateReturnOfCapital(t *testing.T) {
 }
 
 func TestEngine_CalculatePreferredRetrun(t *testing.T) {
-	cfg := PreferedReturnConfig{HurdlePercentage: 0.08}
+	cfg := PreferredReturnConfig{HurdlePercentage: 0.08}
 	now := time.Now()
 	yearAgo := now.AddDate(0, 0, -365)
 
@@ -133,8 +133,8 @@ func TestEngine_CalculatePreferredRetrun(t *testing.T) {
 
 func TestEngine_CalculateCatchup(t *testing.T) {
 	cfg := CatchUpConfig{
-		CatchupPercentage:        1.0,
-		CariedInterestPercentage: 0.2,
+		CatchupPercentage:         1.0,
+		CarriedInterestPercentage: 0.2,
 	}
 
 	testCases := []struct {
