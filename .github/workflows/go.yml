@@ -16,7 +16,7 @@ jobs:
       - name: Build
         run: |
           make bin/templ
-          make generate
+          make ui
           go build -v ./...
 
       - name: Test
