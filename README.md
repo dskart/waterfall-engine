@@ -4,7 +4,7 @@
 
 A Waterfall is a method by which the profits from investments are distributed amoung the various stakeholders. This distribution structure specifies the order and rules for how returns are shared between limited partners (LPs), who are typically the investores providing capital, and the general partners (GPs), who manage the private equity fund.
 
-This repository contains the code for a waterfall engine that can be used to calculate the distribution of profits in a waterfall structure. The engine is written in Go and htmx is used for the front-end.
+This repository contains the code for a waterfall engine that can be used to calculate the distribution of profits in a waterfall structure. The engine is written in Go. HTMX is used for the front-end.
 
 The actual waterfall engine logic is implemented in the [./app/engine](./app/engine) module. 
 
