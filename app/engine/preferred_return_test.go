@@ -53,20 +53,8 @@ func TestEngine_CalculatePreferredRetrun(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			ts, err := calculatePreferredReturn(cfg, now, tc.startingCapital, tc.contributions)
 			assert.ErrorIs(t, err, tc.err)
-			assert.Equal(t, tc.expectedTierStage.TierName, ts.TierName)
 			if err == nil {
-				ok, err := tc.expectedTierStage.StartingCapital.Equals(ts.StartingCapital)
-				assert.NoError(t, err)
-				assert.True(t, ok)
-				ok, err = tc.expectedTierStage.LpAllocattion.Equals(ts.LpAllocattion)
-				assert.NoError(t, err)
-				assert.True(t, ok)
-				ok, err = tc.expectedTierStage.TotalDistribution.Equals(ts.TotalDistribution)
-				assert.NoError(t, err)
-				assert.True(t, ok)
-				ok, err = tc.expectedTierStage.RemainingCapital.Equals(ts.RemainingCapital)
-				assert.NoError(t, err)
-				assert.True(t, ok)
+				assertTierStage(t, tc.expectedTierStage, ts)
 			}
 		})
 	}
