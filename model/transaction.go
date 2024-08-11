@@ -26,10 +26,10 @@ type DateTime struct {
 }
 
 func (date *DateTime) MarshalCSV() (string, error) {
-	return date.Time.Format("02/01/2006"), nil
+	return date.Time.Format("01/02/2006"), nil
 }
 
 func (date *DateTime) UnmarshalCSV(csv string) (err error) {
-	date.Time, err = time.Parse("02/01/2006", csv)
+	date.Time, err = time.Parse("01/02/2006", csv)
 	return err
 }
