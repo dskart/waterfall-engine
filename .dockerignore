@@ -1,0 +1,8 @@
+.tmp/
+air/
+bin/
+waterfall-engine
+*config.yml
+redis_cache/
+dump.rdb
+**/node_modules/

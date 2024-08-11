@@ -1,17 +1,30 @@
-FROM golang:1.22-alpine
+FROM node:20-alpine AS ui-build
+
+WORKDIR /go/src/github.com/dskart/waterfall-engine/ui
+COPY ./ui .
+
+RUN npm install
+RUN npm run build
+
+
+FROM golang:1.22-alpine as build
 
 WORKDIR /go/src/github.com/dskart/waterfall-engine
 COPY . .
+COPY --from=ui-build /go/src/github.com/dskart/waterfall-engine/ui ./ui
 
+RUN go install github.com/a-h/templ/cmd/templ@latest
 RUN go generate ./...
+RUN templ generate
 RUN go build .
+
 
 FROM golang:1.22-alpine
 
 WORKDIR /usr/bin
 
-COPY --from=0 /go/src/github.com/dskart/waterfall-engine/waterfall-engine .
+COPY --from=build /go/src/github.com/dskart/waterfall-engine/waterfall-engine .
 RUN ./waterfall-engine --help > /dev/null
 
-ENTRYPOINT ["/usr/bin/sidekick"]
+ENTRYPOINT ["/usr/bin/waterfall-engine"]
 
