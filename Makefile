@@ -15,11 +15,6 @@ bin/templ:
 .PHONY: bin
 bin: bin/staticcheck bin/air bin/templ
 
-.PHONY: generate
-generate: 
-	go generate ./...
-	./bin/templ generate
-
 .PHONY: waterfall-engine
 waterfall-engine:
 	go build .
@@ -41,7 +36,7 @@ update-htmx:
 
 .PHONY: build-ui
 build-ui:
-	templ generate
+	./bin/templ generate
 	cd ./ui && npm run build
 
 .PHONY: ui

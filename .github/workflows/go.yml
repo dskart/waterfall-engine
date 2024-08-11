@@ -13,10 +13,20 @@ jobs:
         with:
           go-version: "1.22"
 
-      - name: Build
+      - name: Set up npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'v20.9.0'
+      
+      - name: Build UI
         run: |
           make bin/templ
-          make generate
+          cd ./ui && npm install
+          cd ..
+          make ui
+
+      - name: Build
+        run: |
           go build -v ./...
 
       - name: Test
