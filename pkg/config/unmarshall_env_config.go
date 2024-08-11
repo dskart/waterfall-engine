@@ -91,6 +91,12 @@ func unmarshalConfig(prefix string, v reflect.Value, lookup func(string) (*strin
 					return false, fmt.Errorf("invalid value for integer config")
 				}
 				*dest = n
+			case *float64:
+				n, err := strconv.ParseFloat(*env, 64)
+				if err != nil {
+					return false, fmt.Errorf("invalid value for float64 config")
+				}
+				*dest = n
 			case *string:
 				*dest = *env
 			case *[]byte:

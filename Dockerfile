@@ -7,7 +7,7 @@ RUN npm install
 RUN npm run build
 
 
-FROM golang:1.22-alpine as build
+FROM golang:1.22-alpine AS build
 
 WORKDIR /go/src/github.com/dskart/waterfall-engine
 COPY . .

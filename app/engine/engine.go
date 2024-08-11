@@ -18,6 +18,10 @@ func NewEngine(cfg Config) Engine {
 	}
 }
 
+func (e Engine) GetConfig() Config {
+	return e.cfg
+}
+
 type Contribution struct {
 	Date              time.Time
 	Amount            *money.Money

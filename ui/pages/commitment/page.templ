@@ -19,6 +19,7 @@ templ Page(commitmendId string) {
 			@components.Header()
 			<div class="container mx-auto p-4 w-screen">
 				<div hx-get={ string(templ.URL(fmt.Sprintf("/components/commitment/breadcrumbs?commitmentId=%s", commitmendId))) } hx-trigger="load"></div>
+				<div hx-get="/components/commitment/waterfall_parameters" hx-trigger="load" class="flex flex-row-reverse"></div>
 				<div hx-get={ string(templ.URL(fmt.Sprintf("/components/commitment/stats?commitmentId=%s", commitmendId))) } hx-trigger="load" class="flex justify-center py-7"></div>
 				<div hx-get={ string(templ.URL(fmt.Sprintf("/components/commitment/distributions_table?commitmentId=%s", commitmendId))) } hx-trigger="load"></div>
 			</div>

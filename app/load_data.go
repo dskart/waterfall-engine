@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"os"
+	"path"
 
 	"github.com/dskart/waterfall-engine/model"
 	appErrors "github.com/dskart/waterfall-engine/pkg/errors"
@@ -10,21 +11,22 @@ import (
 	"github.com/google/uuid"
 )
 
-func (s *Session) LoadData() appErrors.SanitizedError {
-	if err := s.loadCommitments(); err != nil {
+func (s *Session) LoadData(dirPath string) appErrors.SanitizedError {
+	if err := s.loadCommitments(dirPath); err != nil {
 		return s.InternalError(fmt.Errorf("could not load commiments: %w", err))
 	}
 
-	if err := s.loadTransactions(); err != nil {
+	if err := s.loadTransactions(dirPath); err != nil {
 		return s.InternalError(fmt.Errorf("could not load transactions: %w", err))
 	}
 
 	return nil
 }
 
-func (s *Session) loadCommitments() appErrors.SanitizedError {
+func (s *Session) loadCommitments(dirPath string) appErrors.SanitizedError {
+	location := path.Join(dirPath, "commitments.csv")
 	commitments := []*model.Commitment{}
-	if err := loadFile("./data/commitments.csv", &commitments); err != nil {
+	if err := loadFile(location, &commitments); err != nil {
 		return s.InternalError(fmt.Errorf("could not load commitments: %w", err))
 	}
 
@@ -37,9 +39,10 @@ func (s *Session) loadCommitments() appErrors.SanitizedError {
 	return nil
 }
 
-func (s *Session) loadTransactions() appErrors.SanitizedError {
+func (s *Session) loadTransactions(dirPath string) appErrors.SanitizedError {
+	location := path.Join(dirPath, "transactions.csv")
 	transactions := []*model.Transaction{}
-	if err := loadFile("./data/transactions.csv", &transactions); err != nil {
+	if err := loadFile(location, &transactions); err != nil {
 		return s.InternalError(fmt.Errorf("could not load transactions: %w", err))
 	}
 

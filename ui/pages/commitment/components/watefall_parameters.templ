@@ -1,0 +1,31 @@
+package components
+
+import (
+	"fmt"
+	"github.com/dskart/waterfall-engine/app/engine"
+)
+
+templ WaterfallParameters(cfg engine.Config) {
+	<div class="collapse collapse-arrow bg-base-200 w-auto">
+		<input type="checkbox"/>
+		<div class="collapse-title">Waterfall Engine Config</div>
+		<div class="collapse-content">
+			<strong>Preferred Return:</strong>
+			<ul>
+				<li>Huddle Percentage: { fmt.Sprintf("%.2f", cfg.PreferredReturn.HurdlePercentage * 100) }%</li>
+			</ul>
+			<br/>
+			<strong>Catch Up:</strong>
+			<ul>
+				<li>Catchup Percentage: { fmt.Sprintf("%.2f", cfg.CatchUp.CatchupPercentage * 100) }%</li>
+				<li>Carried Interest Percentage: { fmt.Sprintf("%.2f", cfg.CatchUp.CarriedInterestPercentage * 100) }%</li>
+			</ul>
+			<br/>
+			<strong>Final Split:</strong>
+			<ul>
+				<li>LP Percentage: { fmt.Sprintf("%.2f", cfg.FinalSplit.LpPercentage * 100) }%</li>
+				<li>GP Percentage: { fmt.Sprintf("%.2f", cfg.FinalSplit.GpPercentage * 100) }%</li>
+			</ul>
+		</div>
+	</div>
+}
