@@ -21,6 +21,7 @@ jobs:
       - name: Build UI
         run: |
           make bin/templ
+          cd ./ui && npm install
           make ui
 
       - name: Build
