@@ -102,5 +102,7 @@ A docker image is built and pushed to the [github packages](https://github.com/d
 This project uses [SemVer](https://semver.org/) for versioning.
 The project also uses [release-please](https://github.com/googleapis/release-please) to automatically create releases based on the commit messages.
 
+The project follows the [agile flow](https://medium.com/@mike.naquin/agileflow-4034af0b59fd) method for git branching and releasing
+
 See releases [here](https://github.com/dskart/waterfall-engine/releases)
 
