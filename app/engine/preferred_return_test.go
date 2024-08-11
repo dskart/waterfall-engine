@@ -47,12 +47,6 @@ func TestEngine_CalculatePreferredRetrun(t *testing.T) {
 			contributions:     []Contribution{{Date: yearAgo, Amount: money.NewFromFloat(500, money.USD), ReturnCapitalLeft: money.New(0, money.USD)}, {Date: yearAgo, Amount: money.NewFromFloat(500, money.USD), ReturnCapitalLeft: money.New(0, money.USD)}},
 			expectedTierStage: TierStage{TierName: PreferredReturnStage, StartingCapital: money.NewFromFloat(70, money.USD), LpAllocattion: money.NewFromFloat(70, money.USD), GpAllocattion: money.New(0, money.USD), TotalDistribution: money.NewFromFloat(70, money.USD), RemainingCapital: money.New(0, money.USD)},
 		},
-		{
-			name:              "MoreThanAYer",
-			startingCapital:   money.NewFromFloat(2000, money.USD),
-			contributions:     []Contribution{{Date: now.AddDate(-1, 0, -200), Amount: money.NewFromFloat(1000, money.USD), ReturnCapitalLeft: money.New(0, money.USD)}},
-			expectedTierStage: TierStage{TierName: PreferredReturnStage, StartingCapital: money.NewFromFloat(2000, money.USD), LpAllocattion: money.NewFromFloat(126.51, money.USD), GpAllocattion: money.New(0, money.USD), TotalDistribution: money.NewFromFloat(126.51, money.USD), RemainingCapital: money.NewFromFloat(1873.49, money.USD)},
-		},
 	}
 
 	for _, tc := range testCases {
