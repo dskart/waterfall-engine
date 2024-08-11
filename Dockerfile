@@ -26,6 +26,7 @@ FROM golang:1.22-alpine
 WORKDIR /usr/bin
 
 COPY --from=build /go/src/github.com/dskart/waterfall-engine/waterfall-engine .
+COPY --from=build /go/src/github.com/dskart/waterfall-engine/data ./data
 RUN ./waterfall-engine --help > /dev/null
 
 ENTRYPOINT ["/usr/bin/waterfall-engine"]
