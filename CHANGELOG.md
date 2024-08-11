@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/dskart/waterfall-engine/compare/v1.0.0...v1.1.0) (2024-08-11)
+
+
+### Features
+
+* added default data to docker image ([99da91c](https://github.com/dskart/waterfall-engine/commit/99da91c68435008b7cd0325b9534f3c5003756bb))
+
 ## [1.0.0](https://github.com/dskart/waterfall-engine/compare/v0.1.0...v1.0.0) (2024-08-11)
 
 
