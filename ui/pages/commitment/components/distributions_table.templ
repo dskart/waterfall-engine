@@ -1,14 +1,59 @@
 package components
 
-import "github.com/dskart/waterfall-engine/app/engine"
+import (
+	"fmt"
+	"github.com/dskart/waterfall-engine/app/engine"
+	"strconv"
+)
 
-templ row(distribution engine.Distribution) {
-	<tr>
+templ DistributionsTable(distributions []engine.Distribution) {
+	<script type="text/javascript">
+    function toggleDetails(index) {
+        var details = document.getElementById('details-' + index);
+        var button = document.getElementById('toggle-button-' + index);
+
+        if (details.style.display === 'none') {
+            details.style.display = 'table-row';
+            button.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
+            </svg>`
+        } else {
+            details.style.display = 'none';
+            button.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+            </svg>`
+        }
+    }
+    </script>
+	<table class="table">
+		<thead>
+			<tr class="text-lg">
+				<th>Distribution Date</th>
+				<th>Capital</th>
+			</tr>
+		</thead>
+		<tbody>
+			for i, d := range distributions {
+				@row(d, i)
+			}
+		</tbody>
+	</table>
+}
+
+templ row(distribution engine.Distribution, index int) {
+	<tr id={ fmt.Sprintf("row-%d", index) }>
 		<th>{ distribution.Date.Format("01/02/2006") }</th>
 		<td>{ distribution.Capital.Display() }</td>
+		<td class="flex justify-end">
+			<button id={ fmt.Sprintf("toggle-button-%d", index) } class="btn btn-ghost" data-index={ strconv.Itoa(index) } onclick="toggleDetails(this.getAttribute('data-index'))">
+				@chevronDownIcon()
+			</button>
+		</td>
 	</tr>
-	<tr class="py-4 px-4">
-		<td colspan="2" class="px-8">
+	<tr id={ fmt.Sprintf("details-%d", index) } style="display: none;" class="py-4 px-4">
+		<td colspan="3" class="px-8">
 			<table class="table">
 				<thead>
 					<tr>
@@ -49,18 +94,8 @@ templ tierStageRow(name string, tierStage engine.TierStage) {
 	</tr>
 }
 
-templ DistributionsTable(distributions []engine.Distribution) {
-	<table class="table">
-		<thead>
-			<tr class="text-lg">
-				<th>Distribution Date</th>
-				<th>Capital</th>
-			</tr>
-		</thead>
-		<tbody>
-			for _, d := range distributions {
-				@row(d)
-			}
-		</tbody>
-	</table>
+templ chevronDownIcon() {
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+		<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+	</svg>
 }

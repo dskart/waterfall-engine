@@ -20,3 +20,7 @@ func (s *Session) GetDistributionsByCommitmentId(commitmentId int) ([]engine.Dis
 
 	return distributions, nil
 }
+
+func (s *Session) GetWaterfallParameters() (engine.Config, appErrors.SanitizedError) {
+	return s.app.engine.GetConfig(), nil
+}

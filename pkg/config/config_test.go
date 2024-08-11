@@ -8,8 +8,9 @@ import (
 )
 
 type Config struct {
-	Foo    string `yaml:"Foo"`
-	SubFoo SubFoo `yaml:"SubFoo"`
+	Foo    string  `yaml:"Foo"`
+	SubFoo SubFoo  `yaml:"SubFoo"`
+	Float  float64 `yaml:"Float"`
 }
 
 type SubFoo struct {
@@ -26,11 +27,13 @@ func TestUnmarshalConfig(t *testing.T) {
 		"EnvOnly": {
 			Environment: map[string]string{
 				"TEST_FOO":                  "foo",
+				"TEST_FLOAT":                "2.1234123",
 				"TEST_SUBFOO_SUBBAR":        "1",
 				"TEST_SUBFOO_POINTERSUBBAR": "2",
 			},
 			Expected: &Config{
-				Foo: "foo",
+				Foo:   "foo",
+				Float: 2.1234123,
 				SubFoo: SubFoo{
 					SubBar:        1,
 					PointerSubBar: 2,

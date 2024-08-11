@@ -17,6 +17,7 @@ import (
 
 func init() {
 	serveCmd.Flags().IntP("port", "p", 8080, "the port to listen on")
+	serveCmd.Flags().StringP("data", "d", "./data", "the path to the data directory")
 	rootCmd.AddCommand(serveCmd)
 }
 
@@ -32,9 +33,10 @@ var serveCmd = &cobra.Command{
 			return fmt.Errorf("could not create app: %w", err)
 		}
 
+		dataPath, _ := cmd.Flags().GetString("data")
 		session := app.NewSession(rootLogger).WithContext(ctx)
 		session.Logger().Info("Loading data...")
-		session.LoadData()
+		session.LoadData(dataPath)
 		session.Logger().Info("Data loaded!")
 
 		port, _ := cmd.Flags().GetInt("port")

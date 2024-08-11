@@ -13,6 +13,7 @@ func init() {
 	router.ComponentHandleFunc("/commitment/distributions_table", http.MethodGet, GetDistributionsTable)
 	router.ComponentHandleFunc("/commitment/breadcrumbs", http.MethodGet, GetBreadcrumbs)
 	router.ComponentHandleFunc("/commitment/stats", http.MethodGet, GetStats)
+	router.ComponentHandleFunc("/commitment/waterfall_parameters", http.MethodGet, GetWaterfallParameters)
 }
 
 func GetDistributionsTable(w http.ResponseWriter, r *http.Request) {
@@ -88,6 +89,21 @@ func GetStats(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := Stats(stats).Render(r.Context(), w); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func GetWaterfallParameters(w http.ResponseWriter, r *http.Request) {
+	sess := middleware.CtxSession(r.Context())
+
+	cfg, sanitizedErr := sess.GetWaterfallParameters()
+	if sanitizedErr != nil {
+		http.Error(w, sanitizedErr.Error(), uiErrors.ErrorHTTPStatus(sanitizedErr))
+		return
+	}
+
+	if err := WaterfallParameters(cfg).Render(r.Context(), w); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
