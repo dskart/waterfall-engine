@@ -3,6 +3,8 @@ FROM node:20-alpine AS ui-build
 WORKDIR /go/src/github.com/dskart/waterfall-engine/ui
 COPY ./ui .
 
+RUN mkdir -p ./public/static
+RUN wget https://unpkg.com/htmx.org/dist/htmx.min.js -O ./public/static/htmx.min.js
 RUN npm install
 RUN npm run build
 
