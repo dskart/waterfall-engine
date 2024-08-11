@@ -6,6 +6,8 @@ A Waterfall is a method by which the profits from investments are distributed am
 
 This repository contains the code for a waterfall engine that can be used to calculate the distribution of profits in a waterfall structure. The engine is written in Go and htmx is used for the front-end.
 
+The actual waterfall engine logic is implemented in the [./app/engine](./app/engine) module. 
+
 ## Getting Started
 
 ### Pre-requisites
