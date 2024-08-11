@@ -1,3 +1,5 @@
+![release](https://img.shields.io/github/v/release/dskart/waterfall-engine)
+
 # :ocean: Waterfall Engine :ocean:
 
 A Waterfall is a method by which the profits from investments are distributed amoung the various stakeholders. This distribution structure specifies the order and rules for how returns are shared between limited partners (LPs), who are typically the investores providing capital, and the general partners (GPs), who manage the private equity fund.
@@ -86,3 +88,17 @@ This script will automatically build the Docker image and run the application in
 ## Contributing
 
 Commits should follow the following convention: `refactor|feat|fix|docs|breaking|misc|chore|test: description`
+
+## CI/CD
+
+Github actions is used to run the CI/CD pipeline. Workflows are found under [.github/workflows](.github/workflows).
+
+A docker image is built and pushed to the [github packages](https://github.com/dskart/waterfall-engine/pkgs/container/waterfall-engine) on every commit and release.
+
+## Versioning
+
+This project uses [SemVer](https://semver.org/) for versioning.
+The project also uses [release-please](https://github.com/googleapis/release-please) to automatically create releases based on the commit messages.
+
+See releases [here](https://github.com/dskart/waterfall-engine/releases)
+
