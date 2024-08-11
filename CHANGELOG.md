@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0](https://github.com/dskart/waterfall-engine/compare/v0.1.0...v1.0.0) (2024-08-11)
+
+
+### Features
+
+* docker, ui updates, readme ([#3](https://github.com/dskart/waterfall-engine/issues/3)) ([81b4d72](https://github.com/dskart/waterfall-engine/commit/81b4d72411c1ff67fccb5b31ec5213fc241a465a))
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([3a1f12f](https://github.com/dskart/waterfall-engine/commit/3a1f12f912135231fb6f4faef116a77f3ecd6041))
+
 ## 0.1.0 (2024-08-11)
 
 
