@@ -5,3 +5,4 @@ waterfall-engine
 *config.yml
 redis_cache/
 dump.rdb
+output/
