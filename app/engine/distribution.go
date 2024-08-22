@@ -4,10 +4,11 @@ import (
 	"time"
 
 	"github.com/Rhymond/go-money"
+	"github.com/dskart/waterfall-engine/model"
 )
 
 type Distribution struct {
-	Date            time.Time
+	Date            model.DateTime
 	Capital         *money.Money
 	ROC             TierStage
 	PreferredReturn TierStage
@@ -17,7 +18,7 @@ type Distribution struct {
 
 func NewDistribution(date time.Time, capital *money.Money) Distribution {
 	return Distribution{
-		Date:    date,
+		Date:    model.DateTime{Time: date},
 		Capital: capital,
 	}
 }

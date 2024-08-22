@@ -33,3 +33,11 @@ func (date *DateTime) UnmarshalCSV(csv string) (err error) {
 	date.Time, err = time.Parse("01/02/2006", csv)
 	return err
 }
+
+func (date *DateTime) MarshalJSON() ([]byte, error) {
+	b := make([]byte, 0, len("01/02/2006")+2)
+	b = append(b, '"')
+	b = date.Time.UTC().AppendFormat(b, "01/02/2006")
+	b = append(b, '"')
+	return b, nil
+}
