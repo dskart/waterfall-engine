@@ -32,7 +32,7 @@ type Contribution struct {
 // `transactions` should be a date ascending slice of transactions (contributions and distributions) of a specific LP
 // ComputeDistributions will return the allocation of each waterfall tier for each distribution
 // The waterfall parameters are controled by the Config.
-func (e Engine) ComputeDistributions(transactions []*model.Transaction) ([]Distribution, error) {
+func (e Engine) ComputeDistributions(transactions []*model.Transaction, hurdleRatePercentage float64) ([]Distribution, error) {
 	lpContributions := []Contribution{}
 	distributions := []Distribution{}
 	for _, t := range transactions {
@@ -58,7 +58,9 @@ func (e Engine) ComputeDistributions(transactions []*model.Transaction) ([]Distr
 			newDistribution.ROC = ts
 
 			// ----------------- Preferred Return -----------------
-			ts, err = calculatePreferredReturn(e.cfg.PreferredReturn, t.TransactionDate.Time, ts.RemainingCapital, contributions)
+			preferedReturnCfg := e.cfg.PreferredReturn
+			preferedReturnCfg.HurdlePercentage = hurdleRatePercentage
+			ts, err = calculatePreferredReturn(preferedReturnCfg, t.TransactionDate.Time, ts.RemainingCapital, contributions)
 			if err != nil {
 				return nil, fmt.Errorf("failed to calculate preferred return: %w", err)
 			}

@@ -11,6 +11,7 @@ type PreferredReturnConfig struct {
 }
 
 type CatchUpConfig struct {
+	Enabled                   bool
 	CatchupPercentage         float64 `yaml:"CatchupPercentage"`
 	CarriedInterestPercentage float64 `yaml:"CarriedInterestPercentage"`
 }

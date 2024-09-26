@@ -1,5 +1,5 @@
-entity_name,id,fund_id,commitment_amount
-Nate Cooper,1,1,50000
+entity_name,id,fund_id,commitment_amount,hurdle_rate
+Nate Cooper,1,1,50000,0.08
 John Smith,2,1,50000
 King Bowman,3,1,100000
 Kelly Smith,4,1,200000

@@ -26,20 +26,24 @@ func calculateCatchUp(cfg CatchUpConfig, startingCapital *money.Money, preferred
 		}
 	}
 
-	distribution, err := startingCapital.Subtract(capitalLeft)
+	totalCatchupDistribution, err := startingCapital.Subtract(capitalLeft)
 	if err != nil {
 		return TierStage{}, fmt.Errorf("could not subtract startingCapital and capitalLeft: %w", err)
 	}
-	remainingCapital, err := startingCapital.Subtract(distribution)
+	remainingCapital, err := startingCapital.Subtract(totalCatchupDistribution)
 	if err != nil {
 		return TierStage{}, fmt.Errorf("could not subtract startingCapital and distribution: %w", err)
 	}
+
+	gpDistribution := totalCatchupDistribution * cfg.CatchupPercentage
+	lpDistribution := totalCatchupDistribution * (1 - cfg.CatchupPercentage)
+
 	ret := TierStage{
 		TierName:          CatchUpStage,
 		StartingCapital:   startingCapital,
 		LpAllocattion:     money.New(0, money.USD),
-		GpAllocattion:     distribution,
-		TotalDistribution: distribution,
+		GpAllocattion:     gpDistribution,
+		TotalDistribution: lpDistribution,
 		RemainingCapital:  remainingCapital,
 	}
 
