@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/dskart/waterfall-engine/compare/v1.1.0...v1.2.0) (2024-09-26)
+
+
+### Features
+
+* added gen-distributions cmd ([7eff396](https://github.com/dskart/waterfall-engine/commit/7eff3964bcb452c5b2164e850d7f6d961539cf76))
+* datetime Json marshaling ([a7c457f](https://github.com/dskart/waterfall-engine/commit/a7c457f9dfe226da37f61e9e7b12857803ac536c))
+
 ## [1.1.0](https://github.com/dskart/waterfall-engine/compare/v1.0.0...v1.1.0) (2024-08-11)
 
 
